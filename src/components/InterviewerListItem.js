@@ -2,14 +2,16 @@ import React from "react";
 import "components/InterviewerListItem.scss";
 import classNames from "classnames";
 
-const renderingName = (props) => {
-  if (props.selected) {
-    return props.name;
-  }
-  return "";
-}
+
 
 export default function InterviewerListItem(props) {
+  const renderingName = (props) => {
+    if (props.selected) {
+      return props.name;
+    }
+    return "";
+  };
+  
   let interviewerClass = classNames("interviewers__item",{
     "interviewers__item--selected":props.selected,  
   });
