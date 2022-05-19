@@ -9,13 +9,15 @@ export default function DayList(props) {
         key={eachDay.id}
         name={eachDay.name}
         spots={eachDay.spots}
-        selected={props.selected}
+        selected={eachDay.name === day}
         setDay={setDay}
+        // setDay={() => onClick(day.name)}
       />
     );
   });
   return (
     <ul>
+      
       {dayList}
     </ul>
   );

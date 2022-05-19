@@ -37,6 +37,7 @@ export default function Application(props) {
             days={days}
             day={day}
             setDay={setDay}
+            
           />
         </nav>
         <img
