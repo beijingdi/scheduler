@@ -2,22 +2,22 @@ import React from "react";
 import DayListItem from "./DayListItem.js";
 
 export default function DayList(props) {
-  let {days, day, setDay} = props;
-  const dayList = days.map((eachDay) => {
+  let {days, value, onChange} = props;
+  const dayList = days.map((day) => {
     return (
       <DayListItem
-        key={eachDay.id}
-        name={eachDay.name}
-        spots={eachDay.spots}
-        selected={eachDay.name === day}
-        setDay={setDay}
+        key={day.id}
+        name={day.name}
+        spots={day.spots}
+        selected={day.name === value}
+        setDay={onChange}
         // setDay={() => onClick(day.name)}
       />
     );
   });
   return (
     <ul>
-      
+
       {dayList}
     </ul>
   );
