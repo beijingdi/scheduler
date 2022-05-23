@@ -37,7 +37,7 @@ export default function Application(props) {
     })
   }, []);
   const interviewers = getInterviewersForDay(state, state.day);
-  function bookInterview(id, interview) {
+  const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -53,8 +53,8 @@ export default function Application(props) {
   };
  
   const appointmentsList = dailyAppointments.map((appointment) =>{
-    // console.log(state)
-    const interview = getInterview(state,appointment[0]);
+    console.log({appointment});
+    const interview = getInterview(state,appointment);
     return (
       <Appointment
       key = {appointment.id}

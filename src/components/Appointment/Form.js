@@ -26,13 +26,13 @@ export default function Form(props) {
         <InterviewerList
           interviewers={props.interviewers}
           value={interviewer}
-          onChange={(id) => {setInterviewer(id)}}
+          onChange={setInterviewer}
         />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={()=>{reset(props.onCancel)}}>Cancel</Button>
-          <Button confirm onClick={props.onSave}>Save</Button>
+          <Button confirm onClick={(event) => props.onSave(student, interviewer)}>Save</Button>
         </section>
       </section>
     </main>
