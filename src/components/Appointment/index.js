@@ -11,7 +11,6 @@ import {useVisualMode} from "../../hooks/useVisualMode.js"
  
 
 export default function Appointment(props) {
-  console.log(props);
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -28,7 +27,8 @@ export default function Appointment(props) {
     };
   
     props.bookInterview(props.id,interview)
-    transition(SHOW)
+    .then(() =>transition(SHOW));
+    
   };
 
   return(
