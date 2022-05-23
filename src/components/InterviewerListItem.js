@@ -5,12 +5,7 @@ import classNames from "classnames";
 
 
 export default function InterviewerListItem(props) {
-  const renderingName = (props) => {
-    if (props.selected) {
-      return props.name;
-    }
-    return "";
-  };
+  console.log(props);
 
   let interviewerClass = classNames("interviewers__item",{
     "interviewers__item--selected":props.selected,  
@@ -25,7 +20,7 @@ export default function InterviewerListItem(props) {
         src={props.avatar}
         alt={props.name}
       />
-      {renderingName(props)}
+      {props.selected && props.name}
     </li>
   );
 

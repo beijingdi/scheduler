@@ -6,7 +6,7 @@ import {useVisualMode} from "../hooks/useVisualMode.js";
 
 import "components/Application.scss";
 import DayList from "./DayList";
-import {getAppointmentsForDay, getInterview} from "../helpers/selectors.js";
+import {getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors.js";
 
 export default function Application(props) {
   const [state,setState] = useState({
@@ -21,6 +21,7 @@ export default function Application(props) {
   const setDays = days => setState({...state,days});
   dailyAppointments = getAppointmentsForDay(state, state.day);
 
+
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
@@ -31,13 +32,28 @@ export default function Application(props) {
       setState(prev => ({...prev, 
         days:all[0].data, 
         appointments:all[1].data, 
+        interviewers: all[2].data
       }))
     })
   }, []);
-    
-
+  const interviewers = getInterviewersForDay(state, state.day);
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    setState({
+      ...state,
+      appointments
+    });
+  };
  
   const appointmentsList = dailyAppointments.map((appointment) =>{
+    // console.log(state)
     const interview = getInterview(state,appointment[0]);
     return (
       <Appointment
@@ -45,10 +61,13 @@ export default function Application(props) {
       id = {appointment.id}
       time={appointment.time}
       interview={interview}
-      interviewers={[]}
+      interviewers={interviewers}
+      bookInterview={bookInterview}
       />
     );
   });
+
+
 
   return (
     <main className="layout">
