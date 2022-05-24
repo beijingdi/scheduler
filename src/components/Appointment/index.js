@@ -81,7 +81,7 @@ export default function Appointment(props) {
         onCancel={() => back()}
         onSave={save}
       />}
-      {mode === ERROR_SAVE && <Error message={"Cannot save"} onClose={() => back()}/>}
+      {mode === ERROR_SAVE && <Error message="student name cannot be blank" onClose={() => back()}/>}
       {mode === ERROR_DELETE && <Error message={"Cannot delete"} onClose={() => back()}/>}
     </article>
 

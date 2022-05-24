@@ -60,9 +60,9 @@ export function useApplicationData () {
       const days = updateSpots(state, appointments)
       setState({...state, appointments, days})
     })
-    .catch((error) => {
-      console.log(error);
-    })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
   };
 
   const cancelInterview = (id) => {
