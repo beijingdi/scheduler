@@ -9,13 +9,27 @@ export function useApplicationData () {
     appointments: {},
     interviewers: {}
   });
+  const updateSpots = function(state, appointments) {
+    const index = state.days.findIndex(eachDay => eachDay.name === state.day);
+    const day = state.days[index]
 
+    let spots = 0
+    for(const appointmentId of day.appointments) {
+      if (appointments[appointmentId].interview === null) {
+        spots ++;
+      }
+    }
+    const newDay = {...day, spots: spots}
+    const newDays = [...state.days]
+    newDays[index] = newDay;
+
+    return newDays;
+  }
 
   const setDay = day => setState({...state, day});
   const setDays = days => setState({...state,days});
   
-  let dailyAppointments =[]; 
-  dailyAppointments = getAppointmentsForDay(state, state.day);
+  
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
@@ -43,7 +57,8 @@ export function useApplicationData () {
     return axios.put(`/api/appointments/${id}`, appointment)
     .then((response) => {
       console.log({response});
-      setState({...state, appointments})
+      const days = updateSpots(state, appointments)
+      setState({...state, appointments, days})
     })
     .catch((error) => {
       console.log(error);
@@ -63,7 +78,8 @@ export function useApplicationData () {
 
     return axios.delete(`/api/appointments/${id}`, appointment)
     .then((response) => {
-      setState({...state, appointments });
+      const days = updateSpots(state, appointments)
+      setState({...state, appointments, days});
     })
     .catch((error) => {
       console.log(error);
