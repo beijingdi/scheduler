@@ -77,7 +77,7 @@ export default function Appointment(props) {
         onCancel={() => back()}
         onConfirm={() => cancel(props.id)}/>}
       {mode === EDIT && <Form
-        student={props.interview.interview.student}
+        student={props.interview.student}
         interviewer={props.interview.interviewer.id}
         interviewers={props.interviewers}
         onCancel={() => back()}
