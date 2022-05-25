@@ -52,7 +52,7 @@ export default function Appointment(props) {
   console.log("appointment props are", props);
 
   return(
-    <article className="appointment">
+    <article classsName="appointment">
       {props.time && <Header time={props.time} />}
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
