@@ -49,6 +49,8 @@ export default function Appointment(props) {
     });
   };
 
+  console.log("appointment props are", props);
+
   return(
     <article className="appointment">
       {props.time && <Header time={props.time} />}
@@ -56,7 +58,7 @@ export default function Appointment(props) {
       {mode === SHOW && (
           <Show
             id={props.id}
-            student={props.interview.interview.student}
+            student={props.interview.student}
             interviewer={props.interview.interviewer}
             onDelete={()=> transition(CONFIRM)}
             onEdit={() => transition(EDIT)}

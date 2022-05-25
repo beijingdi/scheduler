@@ -16,10 +16,13 @@ export default function Application(props) {
   } = useApplicationData();
 
   const interviewers = getInterviewersForDay(state, state.day);
-  let dailyAppointments =[]; 
-  dailyAppointments = getAppointmentsForDay(state, state.day);
+  console.log({interviewers});
+  let dailyAppointments = getAppointmentsForDay(state, state.day);
+  console.log({dailyAppointments});
   const appointmentsList = dailyAppointments.map((appointment) =>{
-    const interview = getInterview(state,appointment);
+    console.log({appointment});
+    const interview = getInterview(state,appointment.interview);
+    console.log({interview});
     return (
       <Appointment
       key = {appointment.id}
