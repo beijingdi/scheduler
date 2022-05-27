@@ -1,11 +1,9 @@
-import React, {useState, useEffect} from "react";
-import axios from "axios";
+import React from "react";
 import Appointment from "components/Appointment";
-import {useVisualMode} from "../hooks/useVisualMode.js";
 import {useApplicationData} from "../hooks/useApplicationData.js";
 import {getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors.js";
-import "components/Application.scss";
 import DayList from "./DayList";
+import "components/Application.scss";
 
 export default function Application(props) {
   const {
@@ -16,13 +14,12 @@ export default function Application(props) {
   } = useApplicationData();
 
   const interviewers = getInterviewersForDay(state, state.day);
-  console.log({interviewers});
+  /*
+  ** generate a list of appointment components
+  */
   let dailyAppointments = getAppointmentsForDay(state, state.day);
-  console.log({dailyAppointments});
   const appointmentsList = dailyAppointments.map((appointment) =>{
-    console.log({appointment});
     const interview = getInterview(state,appointment.interview);
-    console.log({interview});
     return (
       <Appointment
       key = {appointment.id}
@@ -35,7 +32,9 @@ export default function Application(props) {
       />
     );
   });
-
+  /*
+  ** render day list and appointment list
+  */
   return (
     <main className="layout">
       <section className="sidebar">
@@ -61,6 +60,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {appointmentsList}
+        <Appointment time="5PM"/>
       </section>
     </main>
   );

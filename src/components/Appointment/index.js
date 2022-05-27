@@ -11,6 +11,9 @@ import {useVisualMode} from "../../hooks/useVisualMode.js"
  
 
 export default function Appointment(props) {
+/*
+** declare different modes for rendering
+*/
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -24,6 +27,9 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
+/*
+** function when save is clicked
+*/
 
   const save = (name, interviewer) => {
     const interview = {
@@ -33,26 +39,23 @@ export default function Appointment(props) {
     transition(SAVING);
     props.bookInterview(props.id,interview)
     .then(() =>transition(SHOW))
-    .catch((err) => {
-      console.log(err);
-      transition(ERROR_SAVE, true);
-    });
-    
+    .catch((err) => transition(ERROR_SAVE, true)); 
   };
-
+/*
+** function when cancel is confirmed
+*/
   const cancel = (interviewId) => {
     transition(DELETING, true);
     props.cancelInterview(interviewId)
     .then(() => transition(EMPTY))
-    .catch((error) =>{
-      transition(ERROR_DELETE, true)
-    });
+    .catch((error) => transition(ERROR_DELETE, true));
   };
 
-  console.log("appointment props are", props);
-
   return(
-    <article classsName="appointment">
+/*
+** conditional rendering dependenton the mode status
+*/
+    <article className="appointment">
       {props.time && <Header time={props.time} />}
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
@@ -83,8 +86,8 @@ export default function Appointment(props) {
         onCancel={() => back()}
         onSave={save}
       />}
-      {mode === ERROR_SAVE && <Error message="student name cannot be blank" onClose={() => back()}/>}
-      {mode === ERROR_DELETE && <Error message={"Cannot delete"} onClose={() => back()}/>}
+      {mode === ERROR_SAVE && <Error message="Could not save appointment" onClose={() => back()}/>}
+      {mode === ERROR_DELETE && <Error message="Could not delete appointment" onClose={() => back()}/>}
     </article>
 
   );

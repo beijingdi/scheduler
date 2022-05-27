@@ -2,7 +2,9 @@ import React from "react";
 import "components/DayListItem.scss";
 import classNames from "classnames";
 
-
+/**
+ * formating number of spots remaining displayed on the day card 
+ */
 const formatSpots = (spot) => {
   if (spot === 0) {
     return "no spots remaining";
@@ -12,7 +14,9 @@ const formatSpots = (spot) => {
   }
   return `${spot} spots remaining`;
 }
-
+/*
+** rendering day card with spots remaining
+*/
 export default function DayListItem(props) {
   let dayClass = classNames("day-list__item", {
     "day-list__item--selected":props.selected,

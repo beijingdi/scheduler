@@ -2,6 +2,9 @@ import React from "react";
 import DayListItem from "./DayListItem.js";
 
 export default function DayList(props) {
+/*
+** generate a daylist to render from the data fetched from server
+*/
   let {days, value, onChange} = props;
   const dayList = days.map((day) => {
     return (
@@ -11,13 +14,11 @@ export default function DayList(props) {
         spots={day.spots}
         selected={day.name === value}
         setDay={onChange}
-        // setDay={() => onClick(day.name)}
       />
     );
   });
   return (
     <ul>
-
       {dayList}
     </ul>
   );

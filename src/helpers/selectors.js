@@ -1,3 +1,6 @@
+/*
+** generate an array of appointments for a given weekday
+*/
 export function getAppointmentsForDay(state,day) {
   let appointmentsForDay = [];
   const filteredAppointment =  state.days.filter(dayObj => dayObj.name === day);
@@ -9,7 +12,9 @@ export function getAppointmentsForDay(state,day) {
   }
   return appointmentsForDay;
 }
-
+/*
+** generate an interview object if any interview is booked
+*/
 export function getInterview(state,interview) {
  if(interview) {
     let interviewerId = interview.interviewer;
@@ -19,6 +24,9 @@ export function getInterview(state,interview) {
   return null;
 }
 
+/*
+** generate the interviews list for a given day
+*/
 export function getInterviewersForDay ({days, interviewers}, day) {
   if (days.length === 0) return [];
   const foundDay = days.find(eachDay => eachDay.name === day);
